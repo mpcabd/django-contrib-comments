@@ -8,7 +8,6 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sites', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('contenttypes', '0001_initial'),
     ]
@@ -28,7 +27,6 @@ class Migration(migrations.Migration):
                 ('is_public', models.BooleanField(default=True, help_text='Uncheck this box to make the comment effectively disappear from the site.', verbose_name='is public')),
                 ('is_removed', models.BooleanField(default=False, help_text='Check this box if the comment is inappropriate. A "This comment has been removed" message will be displayed instead.', verbose_name='is removed')),
                 ('content_type', models.ForeignKey(related_name='content_type_set_for_comment', verbose_name='content type', to='contenttypes.ContentType')),
-                ('site', models.ForeignKey(to='sites.Site')),
                 ('user', models.ForeignKey(related_name='comment_comments', verbose_name='user', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={

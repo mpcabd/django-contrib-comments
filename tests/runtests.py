@@ -19,7 +19,6 @@ settings.configure(
         "django.contrib.auth",
         "django.contrib.contenttypes",
         "django.contrib.sessions",
-        "django.contrib.sites",
         "django.contrib.admin",
         "django_comments",
         "testapp",
@@ -32,7 +31,6 @@ settings.configure(
     ),
     ROOT_URLCONF = 'testapp.urls',
     SECRET_KEY = "it's a secret to everyone",
-    SITE_ID = 1,
 )
 
 from django.test.simple import DjangoTestSuiteRunner

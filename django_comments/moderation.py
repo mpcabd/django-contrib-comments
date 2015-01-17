@@ -60,11 +60,12 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.db.models.base import ModelBase
 from django.template import Context, loader
-from django.contrib.sites.models import get_current_site
 from django.utils import timezone
 
 import django_comments
 from django_comments import signals
+
+SITE_NAME = getattr(settings, 'SITE_NAME', 'example.com')
 
 class AlreadyModerated(Exception):
     """
@@ -241,8 +242,7 @@ class CommentModerator(object):
         t = loader.get_template('comments/comment_notification_email.txt')
         c = Context({ 'comment': comment,
                       'content_object': content_object })
-        subject = '[%s] New comment posted on "%s"' % (get_current_site(request).name,
-                                                          content_object)
+        subject = '[%s] New comment posted on "%s"' % (SITE_NAME, content_object)
         message = t.render(c)
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, fail_silently=True)
 

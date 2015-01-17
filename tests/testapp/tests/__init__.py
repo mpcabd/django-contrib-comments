@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.sites.models import Site
 from django.test import TestCase
 from django.test.utils import override_settings
 
@@ -29,7 +28,6 @@ class CommentTestCase(TestCase):
             user_email = "jsomebody@example.com",
             user_url = "http://example.com/~joe/",
             comment = "First!",
-            site = Site.objects.get_current(),
         )
         c2 = Comment.objects.create(
             content_type = CT(Author),
@@ -38,7 +36,6 @@ class CommentTestCase(TestCase):
             user_email = "jsomebody@example.com",
             user_url = "http://example.com/~joe/",
             comment = "First here, too!",
-            site = Site.objects.get_current(),
         )
 
         # Two authenticated comments: one on the same Article, and
@@ -59,7 +56,6 @@ class CommentTestCase(TestCase):
             user = user,
             user_url = "http://example.com/~frank/",
             comment = "Damn, I wanted to be first.",
-            site = Site.objects.get_current(),
         )
         c4 = Comment.objects.create(
             content_type = CT(Author),
@@ -67,7 +63,6 @@ class CommentTestCase(TestCase):
             user = user,
             user_url = "http://example.com/~frank/",
             comment = "You get here first, too?",
-            site = Site.objects.get_current(),
         )
 
         return c1, c2, c3, c4
