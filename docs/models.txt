@@ -31,12 +31,6 @@ The comment models
         A :class:`~django.db.models.TextField` containing the primary
         key of the object the comment is attached to.
 
-    .. attribute:: site
-
-        A :class:`~django.db.models.ForeignKey` to the
-        :class:`~django.contrib.sites.models.Site` on which the comment was
-        posted.
-
     .. attribute:: user
 
         A :class:`~django.db.models.ForeignKey` to the

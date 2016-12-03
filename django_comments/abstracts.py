@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.sites.models import Site
 from django.core import urlresolvers
 from django.db import models
 from django.utils import timezone
@@ -13,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from .managers import CommentManager
 
 COMMENT_MAX_LENGTH = getattr(settings, 'COMMENT_MAX_LENGTH', 3000)
+SITE_DOMAIN = getattr(settings, 'SITE_DOMAIN', 'example.com')
 
 
 class BaseCommentAbstractModel(models.Model):
@@ -28,9 +28,6 @@ class BaseCommentAbstractModel(models.Model):
                                      on_delete=models.CASCADE)
     object_pk = models.TextField(_('object ID'))
     content_object = GenericForeignKey(ct_field="content_type", fk_field="object_pk")
-
-    # Metadata about the comment
-    site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
     class Meta:
         abstract = True
@@ -165,7 +162,7 @@ class CommentAbstractModel(BaseCommentAbstractModel):
             'user': self.user or self.name,
             'date': self.submit_date,
             'comment': self.comment,
-            'domain': self.site.domain,
+            'domain': SITE_DOMAIN,
             'url': self.get_absolute_url()
         }
         return _('Posted by %(user)s at %(date)s\n\n%(comment)s\n\nhttp://%(domain)s%(url)s') % d

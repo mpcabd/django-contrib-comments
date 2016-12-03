@@ -6,9 +6,7 @@ To get started using the ``comments`` app, follow these steps:
 
 #. Install the comments app by running ``pip install django-contrib-comments``.
 
-#. :ref:`Enable the "sites" framework <enabling-the-sites-framework>` by adding
-   ``'django.contrib.sites'`` to :setting:`INSTALLED_APPS` and defining
-   :setting:`SITE_ID`.
+#. Defining :setting:`SITE_DOMAIN` and :setting:`SITE_NAME`.
 
 #. Install the comments framework by adding ``'django_comments'`` to
    :setting:`INSTALLED_APPS`.

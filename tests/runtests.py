@@ -19,7 +19,6 @@ settings.configure(
         "django.contrib.auth",
         "django.contrib.contenttypes",
         "django.contrib.sessions",
-        "django.contrib.sites",
         "django.contrib.admin",
         "django_comments",
         "testapp",
@@ -43,7 +42,8 @@ settings.configure(
         },
     ],
     SECRET_KEY="it's a secret to everyone",
-    SITE_ID=1,
+    SITE_DOMAIN="example.com",
+    SITE_NAME="example.com",
 )
 
 from django.test.runner import DiscoverRunner

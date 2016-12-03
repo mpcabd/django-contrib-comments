@@ -4,7 +4,6 @@ from xml.etree import ElementTree as ET
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.sites.models import Site
 from django.test.utils import override_settings
 
 from django_comments.models import Comment
@@ -18,17 +17,14 @@ class CommentFeedTests(CommentTestCase):
     feed_url = '/rss/comments/'
 
     def setUp(self):
-        site_2 = Site.objects.create(id=settings.SITE_ID + 1,
-            domain="example2.com", name="example2.com")
-        # A comment for another site
+        # A comment for the site
         Comment.objects.create(
             content_type=ContentType.objects.get_for_model(Article),
             object_pk="1",
             user_name="Joe Somebody",
             user_email="jsomebody@example.com",
             user_url="http://example.com/~joe/",
-            comment="A comment for the second site.",
-            site=site_2,
+            comment="A comment for the site.",
         )
 
     def test_feed(self):
@@ -50,6 +46,4 @@ class CommentFeedTests(CommentTestCase):
         self.assertEqual(link_elem.text, "http://example.com/")
 
         atomlink_elem = channel_elem.find("{http://www.w3.org/2005/Atom}link")
-        self.assertEqual(atomlink_elem.attrib, {"href": "http://example.com/rss/comments/", "rel": "self"})
-
-        self.assertNotContains(response, "A comment for the second site.")
+        self.assertEqual(atomlink_elem.attrib, {"href": "http://testserver/rss/comments/", "rel": "self"})

@@ -8,7 +8,6 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sites', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('contenttypes', '0001_initial'),
     ]
@@ -36,7 +35,6 @@ class Migration(migrations.Migration):
                 ('content_type', models.ForeignKey(related_name='content_type_set_for_comment',
                     verbose_name='content type', to='contenttypes.ContentType',
                     on_delete=models.CASCADE)),
-                ('site', models.ForeignKey(to='sites.Site', on_delete=models.CASCADE)),
                 ('user', models.ForeignKey(related_name='comment_comments', verbose_name='user',
                     blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)),
             ],

@@ -11,8 +11,8 @@ long_description = readme + history
 setup(
     name='django-contrib-comments',
     version='1.7.3',
-    url="https://github.com/django/django-contrib-comments",
-    description='The code formerly known as django.contrib.comments.',
+    url="https://github.com/mpcabd/django-contrib-comments",
+    description='The code formerly known as django.contrib.comments but without Site dependency',
     long_description=long_description,
     author='Django Software Foundation',
     author_email='jacob@jacobian.org',
